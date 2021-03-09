@@ -16,6 +16,16 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert"></button>
+                            <p>
+                                <strong>Penjelasan :</strong>
+                            </p>
+                            <p>
+                            1. Iterasi adalah perulangan yang dilakukan selama syarat cluster belum terpenuhi. <br> 
+                            2. Dalam hal ini jumlah iterasi adalah sebanyak 34 iterasi. <br> 
+                            </p>
+                    </div>
                     <table class="table table-bordered table-hover" id="myTable" style="width: 100%">
                         <thead>
                             <tr>

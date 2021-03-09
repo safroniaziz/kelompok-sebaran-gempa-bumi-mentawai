@@ -20,10 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','FrontendController@index')->name('frontend');
 Route::get('/peta','FrontendController@peta')->name('frontend.peta');
+Route::get('/get_peta','FrontendController@getPeta')->name('frontend.get_peta');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/reset', 'ProsesClusteringController@reset')->name('reset');
 
 Route::group(['prefix'  => '/admin'],function(){
     Auth::routes();
@@ -34,6 +36,7 @@ Route::group(['prefix'  => '/admin/data_gempa'],function(){
 
     Route::get('/','DataGempaController@index')->name('admin.data_gempa');
     Route::get('/2010','DataGempaController@tahun2010')->name('admin.data_gempa.2010');
+    Route::post('/','DataGempaController@post')->name('admin.data.post');
 
 });
 
@@ -53,4 +56,5 @@ Route::group(['prefix'  => '/admin/tampilan_data'],function(){
     Route::get('/grafik','TampilanDataController@grafik')->name('admin.tampilan_data.grafik');
     Route::get('/peta','TampilanDataController@peta')->name('admin.tampilan_data.peta');
     Route::get('/get_peta','TampilanDataController@getPeta')->name('admin.tampilan_data.get_peta');
+    Route::get('/get_grafik','TampilanDataController@getGrafik')->name('admin.tampilan_data.get_grafik');
 });

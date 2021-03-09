@@ -15,7 +15,8 @@ class DataClusteringController extends Controller
     }
 
     public function dataIterasi(){
-        $iterasis = Iterasi::join('data_gempas','data_gempas.id','iterasis.data_gempa_id')->get();
+        $max = PusatCluster::max('iterasi_ke');
+        $iterasis = Iterasi::join('data_gempas','data_gempas.id','iterasis.data_gempa_id')->where('iterasi_ke',$max)->get();
         return view('admin/data_clustering.iterasi',compact('iterasis'));
     }
 

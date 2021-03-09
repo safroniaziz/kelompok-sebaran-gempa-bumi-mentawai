@@ -7,19 +7,19 @@
 
 <li class="{{ set_active('admin.data_gempa') }}">
   <a href="{{ route('admin.data_gempa') }}">
-      <i class="fa fa-dashboard"></i> <span>Data Gempa Bumi</span>
+      <i class="fa fa-list-alt"></i> <span>Data Gempa Bumi</span>
   </a>
 </li>
 
 <li class="{{ set_active('admin.proses_clustering.proses_clustering') }}">
   <a href="{{ route('admin.proses_clustering.proses_clustering') }}">
-      <i class="fa fa-dashboard"></i> <span>Proses Clustering</span>
+      <i class="fa fa-cog"></i> <span>Proses Clustering</span>
   </a>
 </li>
 
 <li class="treeview {{ set_active(['admin.data_clustering.pusat_cluster','admin.data_clustering.data_iterasi','admin.data_clustering.nilai_cost']) }}">
   <a href="#">
-      <i class="fa fa-pencil-square-o"></i> <span>Data Clustering</span>
+      <i class="fa fa-list"></i> <span>Data Proses Clustering</span>
       <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
       </span>
@@ -33,15 +33,15 @@
 
 <li class="treeview {{ set_active(['admin.tampilan_data.table','admin.tampilan_data.grafik','admin.tampilan_data.peta']) }}">
   <a href="#">
-      <i class="fa fa-pencil-square-o"></i> <span>Data Hasil Clustering</span>
+      <i class="fa fa-map-marker"></i> <span>Tampilan Hasil Clustering</span>
       <span class="pull-right-container">
           <i class="fa fa-angle-left pull-right"></i>
       </span>
   </a>
   <ul class="treeview-menu " style="padding-left:25px;">
-      <li class="{{ set_active('admin.tampilan_data.table') }}"><a href="{{ route('admin.tampilan_data.table') }}"><i class="fa fa-address-card"></i>Tampilan Tabel</a></li>
-      <li class="{{ set_active('admin.tampilan_data.grafik') }}"><a href="{{ route('admin.tampilan_data.grafik') }}"><i class="fa fa-pencil-square-o"></i>Tampilan Grafik</a></li>
-      <li class="{{ set_active('admin.tampilan_data.peta') }}"><a href="{{ route('admin.tampilan_data.peta') }}"><i class="fa fa-pencil-square-o"></i>Tampilan Peta</a></li>
+      <li class="{{ set_active('admin.tampilan_data.table') }}"><a href="{{ route('admin.tampilan_data.table') }}"><i class="fa fa-table"></i>Tampilan Tabel</a></li>
+      <li class="{{ set_active('admin.tampilan_data.grafik') }}"><a href="{{ route('admin.tampilan_data.grafik') }}"><i class="fa fa-bar-chart"></i>Tampilan Grafik</a></li>
+      <li class="{{ set_active('admin.tampilan_data.peta') }}"><a href="{{ route('admin.tampilan_data.peta') }}"><i class="fa fa-map"></i>Tampilan Peta</a></li>
   </ul>
 </li>
 

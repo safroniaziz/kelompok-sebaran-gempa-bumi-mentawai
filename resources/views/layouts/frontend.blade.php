@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>eBusiness Bootstrap Template - Index</title>
+  <title>Clustering Sebaran Gempa Bumi</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -54,7 +54,7 @@
 <body data-spy="scroll" data-target="#navbar-example">
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
+  <header id="header" class="fixed-top" style="background-color: black !important">
     <div class="container d-flex">
 
       <div class="logo mr-auto">
@@ -79,12 +79,12 @@
   <!-- ======= Slider Section ======= -->
   <div id="home" class="slider-area">
     <div class="bend niceties preview-2">
-      <div id="ensign-nivoslider" class="slides">
-        <img src="{{ asset('assets/images/seismograf.jpg') }}" alt="" title="#slider-direction-1" />
+      <div id="ensign-nivoslider" class="slides" style="margin-top: 20px;">
+        {{-- <img src="{{ asset('assets/images/seismograf.jpg') }}" alt="" title="#slider-direction-1" /> --}}
       </div>
 
       <!-- direction 1 -->
-      <div id="slider-direction-1" class="slider-direction slider-one">
+      {{-- <div id="slider-direction-1" class="slider-direction slider-one">
         <div class="container">
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -102,7 +102,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
   </div><!-- End Slider -->
 
@@ -112,12 +112,71 @@
     <div id="about" class="about-area area-padding">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="section-headline text-center">
-              <h2>Tampilan Dalam Grafik</h2>
+          <!-- single-well start-->
+          <div class="col-md-12 col-sm-12col-xs-12">
+            <div class="box box-primary">
+                <!-- /.box-header -->
+                <div class="box-body table-responsive">
+                  <form action="{{ route('frontend.get_peta') }}" method="GET">
+                    {{ csrf_field() }} {{ method_field('GET') }}
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                  <label for="">Pilih Tahun</label>
+                                  <select name="tahun" class="form-control" id="">
+                                      <option disabled selected>-- pilih tahun --</option>
+                                      <option value="2010">2010</option>
+                                      <option value="2011">2011</option>
+                                      <option value="2012">2012</option>
+                                      <option value="2013">2013</option>
+                                      <option value="2014">2014</option>
+                                      <option value="2015">2015</option>
+                                      <option value="2016">2016</option>
+                                      <option value="2017">2017</option>
+                                      <option value="2018">2018</option>
+                                      <option value="2019">2019</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-md-12" style="margin-bottom: 10px;">
+                              <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i>&nbsp; Tampilkan</i></button>
+                          </div>
+                      </div>
+                  </form>
+                  @if ($message = Session::get('success'))
+                    <div class="alert alert-success alert-block">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <h6 style="font-size:15px;">
+                                Keterangan Data
+                            </h6>
+                            <p style="font-size:12px">
+                              1. Data yang ditampilkan adalah data pada tahun {{ $tahun }} dalam bentuk peta, diagram batang, dan diagram lingkaran<br>
+                              2. Banyak data berjumlah {{ $jumlah }} data gempa bumi yang terbagi dalam 3 cluster, dengan rincian cluster 1 sebanyak {{ $datas[0]['jumlah'] }} data , cluster 2 sebanyak {{ $datas[1]['jumlah']}} data, dan cluster 3 sebanyak {{ $datas[2]['jumlah'] }} data 
+                            </p>
+                          </div>
+
+                          <div class="col-md-6">
+                            <h6 style="font-size:15px;">
+                                Keterangan Peta
+                            </h6>
+                            <p style="font-size:12px">
+                              1. Peta menampilkan {{ $jumlah }} titik koordinat gempa yang terjadi pada tahun {{ $tahun }}<br>
+                              2. Garis berwarna kuning adalah kelompok cluster 1 dengan keterangan gempa sedang <br>
+                              3. Garis berwarna biru adalah kelompok cluster 2 dengan keterangan gempa kecil <br>
+                              4. Garis berwarna merah adalah kelompok cluster 3 dengan keterangan gempa Besar
+                            </p>
+                          </div>
+                        </div>
+                    </div>
+                  @endif
+                  <div id="map" style="height: 700px; width:100%"></div>
+                </div>
             </div>
           </div>
+          <!-- End col-->
         </div>
+  
         <div class="row">
           <!-- single-well start-->
           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -162,57 +221,7 @@
     <!-- ======= About Section ======= -->
     <div id="about" class="about-area area-padding">
         <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="section-headline text-center">
-                <h2>Tampilan Dalam Peta</h2>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <!-- single-well start-->
-            <div class="col-md-12 col-sm-12col-xs-12">
-              <div class="box box-primary">
-                  <!-- /.box-header -->
-                  <div class="box-body table-responsive">
-                    <form action="{{ route('frontend.peta') }}" method="GET">
-                      {{ csrf_field() }} {{ method_field('GET') }}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="">Pilih Tahun</label>
-                                    <select name="tahun" class="form-control" id="">
-                                        <option disabled selected>-- pilih tahun --</option>
-                                        <option value="2010">2010</option>
-                                        <option value="2011">2011</option>
-                                        <option value="2012">2012</option>
-                                        <option value="2013">2013</option>
-                                        <option value="2014">2014</option>
-                                        <option value="2015">2015</option>
-                                        <option value="2016">2016</option>
-                                        <option value="2017">2017</option>
-                                        <option value="2018">2018</option>
-                                        <option value="2019">2019</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12" style="margin-bottom: 10px;">
-                                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i>&nbsp; Tampilkan</i></button>
-                            </div>
-                        </div>
-                    </form>
-                    @if ($message = Session::get('success'))
-                      <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button> 
-                          <strong>{{ $message }}</strong>
-                      </div>
-                    @endif
-                    <div id="map" style="height: 700px; width:100%"></div>
-                  </div>
-              </div>
-            </div>
-            <!-- End col-->
-          </div>
+          
         </div>
       </div><!-- End About Section -->
       <!-- ======= Skills Section ======= -->
@@ -377,7 +386,8 @@
                 
                     "lat": '<?php echo $data['latitude'] ?>',
                     "lng": '<?php echo $data['longitude']; ?>',
-                    "description": '<?php echo 'Latitude :'.$data['latitude'].'<br>'.'<br>'.'Longitude :'.$data['longitude'] ?>',
+            "description": '<?php echo 'Lokasi :'.$data['lokasi'].'<br>'.'Latitude :'.$data['latitude'].'<br>'.'Longitude :'.$data['longitude'].'<br>'.'Kekuatan :'.$data['kekuatan'].'<br>'.'Kedalaman :'.$data['kedalaman'].'<br>'.'Waktu Detail :'.$data['waktu_detail'] ?>',
+                    
                 
                     "icon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
                 
@@ -398,7 +408,8 @@
           
               "lat": '<?php echo $data['latitude'] ?>',
               "lng": '<?php echo $data['longitude']; ?>',
-              "description": '<?php echo 'Latitude :'.$data['latitude'].'<br>'.'<br>'.'Longitude :'.$data['longitude'] ?>',
+              "description": '<?php echo 'Lokasi :'.$data['lokasi'].'<br>'.'Latitude :'.$data['latitude'].'<br>'.'Longitude :'.$data['longitude'].'<br>'.'Kekuatan :'.$data['kekuatan'].'<br>'.'Kedalaman :'.$data['kedalaman'].'<br>'.'Waktu Detail :'.$data['waktu_detail'] ?>',
+              
           
               "icon": "{{ asset('assets/images/marker_1.jpeg') }}"
           
@@ -424,7 +435,8 @@
           
               "lat": '<?php echo $data['latitude'] ?>',
               "lng": '<?php echo $data['longitude']; ?>',
-              "description": '<?php echo 'Latitude :'.$data['latitude'].'<br>'.'<br>'.'Longitude :'.$data['longitude'] ?>',
+            "description": '<?php echo 'Lokasi :'.$data['lokasi'].'<br>'.'Latitude :'.$data['latitude'].'<br>'.'Longitude :'.$data['longitude'].'<br>'.'Kekuatan :'.$data['kekuatan'].'<br>'.'Kedalaman :'.$data['kedalaman'].'<br>'.'Waktu Detail :'.$data['waktu_detail'] ?>',
+              
           
               "icon": icon2
           
@@ -544,7 +556,7 @@
       var jarakPath = new google.maps.Polyline({
               path: jarak,
               geodesic: true,
-              strokeColor: '#000080',
+              strokeColor: 'yellow',
               strokeOpacity: 1.0,
               strokeWeight: 2
           });
@@ -567,7 +579,7 @@
       var jarakPath2 = new google.maps.Polyline({
               path: jarak2,
               geodesic: true,
-              strokeColor: 'red',
+              strokeColor: 'blue',
               strokeOpacity: 1.0,
               strokeWeight: 2
       });
@@ -591,7 +603,7 @@
       var jarakPath3 = new google.maps.Polyline({
               path: jarak3,
               geodesic: true,
-              strokeColor: 'yellow',
+              strokeColor: 'red',
               strokeOpacity: 1.0,
               strokeWeight: 2
       });

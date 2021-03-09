@@ -25,10 +25,87 @@
 @endpush
 @section('content')
     <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><i class="fa fa-calendar"></i>&nbsp;Pencarian Data</h3>
+                </div>
+                <div class="box-body">
+                    <form action="{{ route('admin.tampilan_data.get_grafik') }}" method="GET">
+                        {{ csrf_field() }} {{ method_field('GET') }}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Pilih Tahun</label>
+                                    <select name="tahun" class="form-control" id="">
+                                        <option disabled selected>-- pilih tahun --</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check-circle"></i>&nbsp; Tampilkan</button>
+                            </div>
+                        </div>
+                    </form>
+                    <?php
+                        if (isset($_GET['tahun'])) {
+                    ?>
+                        <div class="alert alert-success alert-block">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 style="font-size:15px;">
+                                        Keterangan Peta
+                                    </h6>
+                                    <p style="font-size:12px"> 
+                                        1. Grafik menampilkan {{ $jumlah }} data gempa yang terjadi pada tahun {{ $tahun }} dalam 3 cluster<br>
+                                        2. Cluster terbanyak ada pada cluster 3 dengan jumlah {{ $datas[0]['jumlah'] }} data <br>
+                                        3. Cluster terbanyak kedua ada pada cluster 2 dengan jumlah {{ $datas[1]['jumlah'] }} data <br>
+                                        4. Cluster terbanyak ketiga ada pada cluster 1 dengan jumlah {{ $datas[2]['jumlah'] }} data <br>
+                                        </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php 
+                        }
+                        else{
+                    ?>
+                        <div class="alert alert-success alert-block">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 style="font-size:15px;">
+                                        Keterangan Grafik
+                                    </h6>
+                                    <p style="font-size:12px"> 
+                                    1. Grafik menampilkan 1356 data gempa yang terjadi dari tahun 2010-2009 dalam 3 cluster<br>
+                                    2. Cluster terbanyak ada pada cluster 3 dengan jumlah 1126 data <br>
+                                    3. Cluster terbanyak kedua ada pada cluster 2 dengan jumlah 150 data <br>
+                                    4. Cluster terbanyak ketiga ada pada cluster 1 dengan jumlah 80 data <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php 
+                        }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-calendar"></i>&nbsp;Manajemen Data Mata Kuliah</h3>
+                    <h3 class="box-title"><i class="fa fa-calendar"></i>&nbsp;Tampilan Diagram Batang</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
@@ -50,7 +127,7 @@
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-calendar"></i>&nbsp;Tampilan Dalam Bentuk Grafik</h3>
+                    <h3 class="box-title"><i class="fa fa-calendar"></i>&nbsp;Tampilan Diagram Lingkaran</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">

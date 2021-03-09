@@ -18,31 +18,31 @@ class ProsesClusteringController extends Controller
         $cluster1 = Iterasi::join('data_gempas','data_gempas.id','iterasis.data_gempa_id')
                             ->select('latitude','longitude','tahun','kekuatan','kedalaman')
                             ->where('kelompok_cluster','1')
-                            ->where('iterasi_ke','3')
+                            ->where('iterasi_ke',$max)
                             ->orderBy('tahun')
                             ->get();
         $cluster2 = Iterasi::join('data_gempas','data_gempas.id','iterasis.data_gempa_id')
                             ->select('latitude','longitude','tahun','kekuatan','kedalaman')
                             ->where('kelompok_cluster','2')
-                            ->where('iterasi_ke','3')
+                            ->where('iterasi_ke',$max)
                             ->orderBy('tahun')
                             ->get();
         $cluster3 = Iterasi::join('data_gempas','data_gempas.id','iterasis.data_gempa_id')
                             ->select('latitude','longitude','tahun','kekuatan','kedalaman')
                             ->where('kelompok_cluster','3')
-                            ->where('iterasi_ke','3')
+                            ->where('iterasi_ke',$max)
                             ->orderBy('tahun')
                             ->get();
 
         $datas = PusatCluster::join('data_gempas','data_gempas.id','pusat_clusters.data_gempa_id')->get();
         $max_cost = NilaiCost::max('iterasi_ke');
         $max_min_1 = $max-1;
-        $cluster_satu = Iterasi::select(DB::raw('count(kelompok_cluster) as jumlah'))->where('kelompok_cluster','1')->where('iterasi_ke','3')->first();
-        $cluster_dua = Iterasi::select(DB::raw('count(kelompok_cluster) as jumlah'))->where('kelompok_cluster','2')->where('iterasi_ke','3')->first();
-        $cluster_tiga = Iterasi::select(DB::raw('count(kelompok_cluster) as jumlah'))->where('kelompok_cluster','3')->where('iterasi_ke','3')->first();
+        $cluster_satu = Iterasi::select(DB::raw('count(kelompok_cluster) as jumlah'))->where('kelompok_cluster','1')->where('iterasi_ke',$max)->first();
+        $cluster_dua = Iterasi::select(DB::raw('count(kelompok_cluster) as jumlah'))->where('kelompok_cluster','2')->where('iterasi_ke',$max)->first();
+        $cluster_tiga = Iterasi::select(DB::raw('count(kelompok_cluster) as jumlah'))->where('kelompok_cluster','3')->where('iterasi_ke',$max)->first();
         $cost_awal = NilaiCost::first();
         $cost_sebelumnya = NilaiCost::select('nilai_cost')->orderBy('id','desc')->skip(1)->first();
-        $cost_akhir = NilaiCost::select('nilai_cost')->where('iterasi_ke','3')->first();
+        $cost_akhir = NilaiCost::select('nilai_cost')->where('iterasi_ke',$max)->first();
         return view('admin/proses_cluster/pusat_cluster',compact('datas','max','max_cost','cluster_satu','cluster_dua','cluster_tiga','cost_awal','cost_sebelumnya','cost_akhir','cluster1','cluster2','cluster3'));
     }
 
@@ -50,22 +50,22 @@ class ProsesClusteringController extends Controller
         $max = PusatCluster::max('iterasi_ke');
         $data_gempa = DataGempa::inRandomOrder()->select('id')->take(3)->get();
         $max_cluster = PusatCluster::max('iterasi_ke');
-        for ($i=0; $i <count($data_gempa) ; $i++) { 
-            if (empty($max_cluster)) {
-                $post = new PusatCluster;
-                $post->iterasi_ke = 1;
-                $post->cluster_ke = $i+1;
-                $post->data_gempa_id = $data_gempa[$i]->id;
-                $post->save();
-            }
-            else{
-                $post = new PusatCluster;
-                $post->iterasi_ke = $max+1;
-                $post->cluster_ke = $i+1;
-                $post->data_gempa_id = $data_gempa[$i]->id;
-                $post->save();
-            }
-        }
+        // for ($i=0; $i <count($data_gempa) ; $i++) { 
+        //     if (empty($max_cluster)) {
+        //         $post = new PusatCluster;
+        //         $post->iterasi_ke = 1;
+        //         $post->cluster_ke = $i+1;
+        //         $post->data_gempa_id = $data_gempa[$i]->id;
+        //         $post->save();
+        //     }
+        //     else{
+        //         $post = new PusatCluster;
+        //         $post->iterasi_ke = $max+1;
+        //         $post->cluster_ke = $i+1;
+        //         $post->data_gempa_id = $data_gempa[$i]->id;
+        //         $post->save();
+        //     }
+        // }
 
         $max2 = PusatCluster::max('iterasi_ke');
         $data_gempa_cluster = DataGempa::select('id','kedalaman','kekuatan')->get();
@@ -144,6 +144,15 @@ class ProsesClusteringController extends Controller
             'iterasi_ke'    =>  $max3,
             'nilai_cost'    =>  $data_cost[0]->nilai_cost,
         ]);
+
+        return redirect()->route('admin.proses_clustering.proses_clustering');
+    }
+
+    public function reset(){
+        DataGempa::truncate();
+        NilaiCost::truncate();
+        PusatCluster::truncate();
+        Iterasi::truncate();
 
         return redirect()->route('admin.proses_clustering.proses_clustering');
     }

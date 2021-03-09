@@ -16,6 +16,18 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
+                    <div class="alert alert-success alert-block">
+                        <button type="button" class="close" data-dismiss="alert"></button>
+                            <p>
+                                <strong>Penjelasan :</strong>
+                            </p>
+                            <p>
+                            1. Nilai Cost adalah nilai akhir dari jumlah seluruh nilai minimal yang didapatkan. <br> 
+                            2. Nilai Cost awal yang di dapatkan pada studi kasus ini adalah 44307.38. <br> 
+                            3. Nilai Cost akhir yang di dapatkan pada studi kasus ini adalah 44487.82. <br> 
+                            
+                            </p>
+                    </div>
                     <table class="table table-bordered table-hover" id="myTable" style="width: 100%">
                         <thead>
                             <tr>

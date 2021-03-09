@@ -31,7 +31,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-primary">
+            <div class="small-box bg-blue">
                 <div class="inner">
                     <h3>{{ $datas }}</h3>
 
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-aqua">
+            <div class="small-box bg-green">
                 <div class="inner">
                     <h3>{{ $iterasis->iterasi_ke }}</h3>
 
@@ -57,11 +57,11 @@
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-green">
+            <div class="small-box bg-yellow">
                     <div class="inner">
-                    <h3>{{ number_format($costs->nilai_cost) }}</h3>
+                    <h3>{{ number_format($cost_awal->nilai_cost) }}</h3>
 
-                    <p>Nilai Cost</p>
+                    <p>Nilai Cost Awal</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-users"></i>
@@ -70,16 +70,64 @@
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>10</h3>
+            <div class="small-box bg-red">
+                    <div class="inner">
+                    <h3>{{ number_format($costs->nilai_cost) }}</h3>
 
-                    <p>Jumlah Tahun</p>
+                    <p>Nilai Cost Terakhir</p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-barcode"></i>
+                    <i class="fa fa-users"></i>
                 </div>
                 <a href="" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box" >
+                <span class="info-box-icon bg-blue"><i class="fa fa-list"></i></span>
+
+                <div class="info-box-content">
+                <span class="info-box-text">Cluster Satu</span>
+                <span class="info-box-number">
+                    {{ $cluster_satu['jumlah'] }} <a style="font-weight: 500">Data</a>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box" >
+                <span class="info-box-icon bg-green"><i class="fa fa-list-alt"></i></span>
+
+                <div class="info-box-content">
+                <span class="info-box-text">Cluster Dua</span>
+                <span class="info-box-number">
+                    {{ $cluster_dua['jumlah'] }} <a style="font-weight: 500">Data</a>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box" >
+                <span class="info-box-icon bg-yellow"><i class="fa fa-book"></i></span>
+
+                <div class="info-box-content">
+                <span class="info-box-text">Cluster Tiga</span>
+                <span class="info-box-number">
+                    {{ $cluster_tiga['jumlah'] }} <a style="font-weight: 500">Data</a>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box" >
+                <span class="info-box-icon bg-red"><i class="fa fa-book"></i></span>
+
+                <div class="info-box-content">
+                <span class="info-box-text">Jumlah Tahun</span>
+                <span class="info-box-number">
+                    10 <a style="font-weight: 500">Tahun</a>
+                </span>
+                </div>
             </div>
         </div>
     </div>

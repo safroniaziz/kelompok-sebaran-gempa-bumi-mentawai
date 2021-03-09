@@ -42,12 +42,34 @@
                             </div>
                         </div>
                     </form>
-                    @if ($message = Session::get('success'))
-                      <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button> 
-                          <strong>{{ $message }}</strong>
-                      </div>
-                    @endif
+                    <?php
+                        if (isset($_GET['tahun'])) {
+                    ?>
+                        <div class="alert alert-success alert-block">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 style="font-size:15px;">
+                                        Keterangan Peta
+                                    </h6>
+                                    <p style="font-size:12px">
+                                    1. Peta menampilkan {{ $jumlah }} titik koordinat gempa yang terjadi pada tahun {{ $tahun }}<br>
+                                    2. Garis berwarna kuning adalah kelompok cluster 1 dengan keterangan gempa sedang <br>
+                                    3. Garis berwarna biru adalah kelompok cluster 2 dengan keterangan gempa kecil <br>
+                                    4. Garis berwarna merah adalah kelompok cluster 3 dengan keterangan gempa Besar <br>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php 
+                        }
+                        else{
+                    ?>
+                        <div class="alert alert-success alert-block">
+                                <strong>Perhatian :</strong> Silahkan pilih tahun untuk ditampilkan
+                        </div>
+                    <?php 
+                        }
+                    ?>
                     <div id="map" style="height: 700px; width:100%"></div>
                 </div>
             </div>
@@ -71,8 +93,8 @@
               
                   "lat": '<?php echo $data['latitude'] ?>',
                   "lng": '<?php echo $data['longitude']; ?>',
-                  "description": '<?php echo 'Latitude :'.$data['latitude'].'<br>'.'<br>'.'Longitude :'.$data['longitude'] ?>',
-              
+                    "description": '<?php echo 'Lokasi :'.$data['lokasi'].'<br>'.'Latitude :'.$data['latitude'].'<br>'.'Longitude :'.$data['longitude'].'<br>'.'Kekuatan :'.$data['kekuatan'].'<br>'.'Kedalaman :'.$data['kedalaman'].'<br>'.'Waktu Detail :'.$data['waktu_detail'] ?>',
+                  
                   "icon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
               
               
@@ -92,7 +114,7 @@
         
             "lat": '<?php echo $data['latitude'] ?>',
             "lng": '<?php echo $data['longitude']; ?>',
-            "description": '<?php echo 'Latitude :'.$data['latitude'].'<br>'.'<br>'.'Longitude :'.$data['longitude'] ?>',
+            "description": '<?php echo 'Lokasi :'.$data['lokasi'].'<br>'.'Latitude :'.$data['latitude'].'<br>'.'Longitude :'.$data['longitude'].'<br>'.'Kekuatan :'.$data['kekuatan'].'<br>'.'Kedalaman :'.$data['kedalaman'].'<br>'.'Waktu Detail :'.$data['waktu_detail'] ?>',
         
             "icon": "{{ asset('assets/images/marker_1.jpeg') }}"
         
@@ -118,7 +140,7 @@
         
             "lat": '<?php echo $data['latitude'] ?>',
             "lng": '<?php echo $data['longitude']; ?>',
-            "description": '<?php echo 'Latitude :'.$data['latitude'].'<br>'.'<br>'.'Longitude :'.$data['longitude'] ?>',
+            "description": '<?php echo 'Lokasi :'.$data['lokasi'].'<br>'.'Latitude :'.$data['latitude'].'<br>'.'Longitude :'.$data['longitude'].'<br>'.'Kekuatan :'.$data['kekuatan'].'<br>'.'Kedalaman :'.$data['kedalaman'].'<br>'.'Waktu Detail :'.$data['waktu_detail'] ?>',
         
             "icon": icon2
         
@@ -238,7 +260,7 @@ function LoadMap() {
     var jarakPath = new google.maps.Polyline({
             path: jarak,
             geodesic: true,
-            strokeColor: '#000080',
+            strokeColor: 'yellow',
             strokeOpacity: 1.0,
             strokeWeight: 2
         });
@@ -261,7 +283,7 @@ function LoadMap() {
     var jarakPath2 = new google.maps.Polyline({
             path: jarak2,
             geodesic: true,
-            strokeColor: 'red',
+            strokeColor: 'blue',
             strokeOpacity: 1.0,
             strokeWeight: 2
     });
@@ -285,7 +307,7 @@ function LoadMap() {
     var jarakPath3 = new google.maps.Polyline({
             path: jarak3,
             geodesic: true,
-            strokeColor: 'yellow',
+            strokeColor: 'red',
             strokeOpacity: 1.0,
             strokeWeight: 2
     });

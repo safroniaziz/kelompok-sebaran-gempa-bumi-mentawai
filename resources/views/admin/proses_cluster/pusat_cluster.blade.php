@@ -13,37 +13,41 @@
         <div class="box-body" style="background-color: #f4f6f9 !important">
             <div class="row">
                 <div class="col-md-12">
-                    @if (!empty($max))
+                    {{-- @if (!empty($max))
                         @if ($max == $max_cost)
-                            @if ($max == 1)
-                                <div class="alert alert-info alert-block">
+                            @if ($max == 1) --}}
+                                {{-- <div class="alert alert-info alert-block">
                                     <button type="button" class="close" data-dismiss="alert">×</button>
                                         <i class="fa fa-success-circle"></i><strong>Perhatian :</strong> Iterasi ke {{ $max }} sudah berhasil, silahkan lanjutkan ke iterasi ke {{ $max+1 }}
-                                </div>
-                                @else
+                                </div> --}}
+                                {{-- @else --}}
                                     {{-- @if ($cost_sebelumnya->nilai_cost < $cost_akhir->nilai_cost) --}}
                                         {{-- <div class="alert alert-success alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                                 <i class="fa fa-success-circle"></i><strong>Perhatian :</strong> Iterasi dihentikan pada iterasi ke {{ $max }}, nilai cost baru lebih besar dari nilai cost lama
                                         </div> --}}
                                         {{-- @else --}}
-                                        <div class="alert alert-success alert-block">
+                                        {{-- <div class="alert alert-success alert-block">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                                 <i class="fa fa-success-circle"></i><strong>Perhatian :</strong> Iterasi ke {{ $max }} sudah berhasil silahkan lanjutkan iterasi jika diperlukan !!
+                                        </div> --}}
+                                        <div class="alert alert-success alert-block">
+                                            <button type="button" class="close" data-dismiss="alert"></button>
+                                                <p>
+                                                    <strong>Penjelasan :</strong>
+                                                </p>
+                                                <p>
+                                                1. Iterasi terkahir dilakukan adalah hingga iterasi ke 34, karena telah memenuhi syarat jika nilai cost iterasi terakhir lebih besar dari nilai cost iterasi awal <br>
+                                                2. Didapatkan sejumlah 80 data yang termasuk pada cluster 1 <br>
+                                                3. Didapatkan sejumlah 80 data yang termasuk pada cluster 2 <br>
+                                                4. Didapatkan sejumlah 80 data yang termasuk pada cluster 3 
+                                                </p>
                                         </div>
                                 {{-- @endif --}}
-                            @endif
+                            {{-- @endif
                             
                         @endif
-                    @endif
-                </div>
-                <div class="col-md-12">
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                            <i class="fa fa-success-circle"></i><strong>Berhasil :</strong> {{ $message }}
-                        </div>
-                    @endif
+                    @endif --}}
                 </div>
                 <div class="col-md-12" style="margin-bottom: 10px;">
                     @if ($max > 1)
@@ -64,8 +68,6 @@
                     @endif
                 </div>
                 <div class="col-md-12">
-                    @if ($max > 1)
-                        @if ($cost_awal->nilai_cost < $cost_akhir->nilai_cost)
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <div class="info-box">
                                   <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
@@ -114,18 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @else
-                            <div class="alert alert-danger alert-block">
-                                <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <i class="fa fa-close"></i>Silahkan selesaikan proses iterasi terlebih dahulu !!
-                            </div>
-                        @endif
-                        @else
-                        <div class="alert alert-danger alert-block">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                                <i class="fa fa-close"></i>Silahkan selesaikan proses iterasi terlebih dahulu !!
-                        </div>
-                    @endif
+                      
                 </div>
                 <div class="col-md-12">
                     <div class="box box-primary">
@@ -235,6 +226,11 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{{ route('reset') }}" class="btn btn-primary btn-sm"><i class="fa fa-refresh"></i>&nbsp; Reset Data</a>
+                            </div>
                         </div>
                     </div>
                 </div>
